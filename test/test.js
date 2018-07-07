@@ -71,13 +71,36 @@ describe('正则表达式', () => {
   });
 
   it('匹配邮箱', () => {
+    // 用例来自https://en.wikipedia.org/wiki/Email_address
     [
       '12345@qq.com',
+      'simple@example.com',
+      'very.common@example.com',
+      'disposable.style.email.with+symbol@example.com',
+      'other.email-with-hyphen@example.com',
+      'fully-qualified-domain@example.com',
+      'user.name+tag+sorting@example.com',
+      'x@example.com',
+      '\"very.(),:;<>[]\\\".VERY.\\\"very@\\\\ \\\"very\\\".unusual"@strange.example.com',
+      'example-indeed@strange-example.com',
+      'admin@mailserver1',
+      '#!$%&\'*+-/=?^_`{}|~@example.org',
+      '\"()<>[]:,;@\\\\\\\"!#$%&\'-/=?^_`{}| ~.a\"@example.org',
+      'example@s.example',
+      '\" \"@example.org'
     ].forEach((value) => {
       assert.ok(RegExps.email.test(value));
     });
     [
       '12345#qq.com',
+      'Abc.example.com',
+      'A@b@c@example.com',
+      'a\"b(c)d,e:f;g<h>i[j\k]l@example.com',
+      'just"not"right@example.com',
+      'this is"not\\allowed@example.com',
+      'this\\ still\\\"not\\\\allowed@example.com',
+      '1234567890123456789012345678901234567890123456789012345678901234+x@example.com',
+      'john.doe@example..com'
     ].forEach((value) => {
       assert.ok(!RegExps.email.test(value));
     });
@@ -86,11 +109,16 @@ describe('正则表达式', () => {
   it('匹配 url', () => {
     [
       'https://www.qq.com',
+      'http://www.myownpersonaldomain.org/2008/category/name-of-blog-post/',
+      'http://examplepetstore.com/dogs/food.php',
     ].forEach((value) => {
       assert.ok(RegExps.url.test(value));
     });
     [
       'http//www.qq.com',
+      'http:/www.qq.com',
+      'http://qqcom',
+      'ahttp://qqcom'
     ].forEach((value) => {
       assert.ok(!RegExps.url.test(value));
     });
@@ -99,11 +127,18 @@ describe('正则表达式', () => {
   it('匹配 IPv4', () => {
     [
       '127.0.0.1',
+      '0.0.0.0',
+      '27.0.0.1'
     ].forEach((value) => {
       assert.ok(RegExps.ipv4.test(value));
     });
     [
       '256.0.0.0',
+      '256.256.0.1',
+      '256.256.256.256',
+      '.256.256.256',
+      '256.256.256',
+      'a255.255.255.255'
     ].forEach((value) => {
       assert.ok(!RegExps.ipv4.test(value));
     });
@@ -112,6 +147,13 @@ describe('正则表达式', () => {
   it('匹配身份证号码', () => {
     [
       '350301198906180060',
+      '33112119750227704X',
+      '13018519910629801X',
+      '141029199211129054',
+      '120107198311032274',
+      '110200199311299431',
+      '130428198204220421',
+      '640201198612122547',
     ].forEach((value) => {
       assert.ok(RegExps.idcard.test(value));
     });

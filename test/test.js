@@ -40,7 +40,7 @@ describe('正则表达式', () => {
     [
       '1000',
       '0987654321',
-      '123456789000',
+      '123456789000'
     ].forEach((qq) => {
       assert.ok(!RegExps.qq.test(qq));
     });
@@ -85,7 +85,9 @@ describe('正则表达式', () => {
 
   it('匹配 url', () => {
     [
-      'https://www.qq.com',
+      'https://qq.com',
+      'http://www.qq.com/vip/me.pdf',
+      'ftp://qq.com'
     ].forEach((value) => {
       assert.ok(RegExps.url.test(value));
     });

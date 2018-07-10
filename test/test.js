@@ -1,8 +1,8 @@
 /*
  * @Author: kael 
  * @Date: 2018-02-14 17:35:48 
- * @Last Modified by: kael
- * @Last Modified time: 2018-03-10 22:48:51
+ * @Last Modified by: zelda.zhangze
+ * @Last Modified time: 2018-07-10 13:30:54
  */
 
 const assert = require('assert');
@@ -24,6 +24,8 @@ describe('正则表达式', () => {
       '147000000000',
       '150-123-41234',
       '150-1234-1234',
+      '13491231234',
+      ''
     ].forEach((mobile) => {
       assert.ok(!RegExps.mobile.test(mobile));
     });
@@ -41,6 +43,7 @@ describe('正则表达式', () => {
       '1000',
       '0987654321',
       '123456789000',
+      ''
     ].forEach((qq) => {
       assert.ok(!RegExps.qq.test(qq));
     });
@@ -65,6 +68,12 @@ describe('正则表达式', () => {
     [
       '.5.5',
       '1.5.5',
+      '',
+      '.',
+      '+',
+      '-',
+      '+.',
+      '-.'
     ].forEach((number) => {
       assert.ok(!RegExps.number.test(number));
     });
@@ -73,11 +82,17 @@ describe('正则表达式', () => {
   it('匹配邮箱', () => {
     [
       '12345@qq.com',
+      'a_z@qq.com'
     ].forEach((value) => {
       assert.ok(RegExps.email.test(value));
     });
     [
       '12345#qq.com',
+      '12',
+      '@1.com',
+      '',
+      'a-z@qq.com',
+      '-12@qq.com'
     ].forEach((value) => {
       assert.ok(!RegExps.email.test(value));
     });
@@ -86,11 +101,13 @@ describe('正则表达式', () => {
   it('匹配 url', () => {
     [
       'https://www.qq.com',
+      'qq.com'
     ].forEach((value) => {
       assert.ok(RegExps.url.test(value));
     });
     [
       'http//www.qq.com',
+      ''
     ].forEach((value) => {
       assert.ok(!RegExps.url.test(value));
     });
@@ -104,6 +121,7 @@ describe('正则表达式', () => {
     });
     [
       '256.0.0.0',
+      ''
     ].forEach((value) => {
       assert.ok(!RegExps.ipv4.test(value));
     });
@@ -112,6 +130,7 @@ describe('正则表达式', () => {
   it('匹配身份证号码', () => {
     [
       '350301198906180060',
+      '350301890618006' // 15位
     ].forEach((value) => {
       assert.ok(RegExps.idcard.test(value));
     });
@@ -120,6 +139,8 @@ describe('正则表达式', () => {
       '350301298906310060',
       '35030129890618006Y',
       '3503012989061800666',
+      '350301199331311234',
+      ''
     ].forEach((value) => {
       assert.ok(!RegExps.idcard.test(value));
     });

@@ -130,6 +130,7 @@ describe('正则表达式', () => {
       '3503012989061800666',
     ].forEach((value) => {
       assert.ok(!RegExps.idcard.test(value));
+      // assert.ok(!RegExps.isIdCard(value));
     });
   });
 

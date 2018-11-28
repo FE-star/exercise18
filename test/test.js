@@ -81,11 +81,15 @@ describe('正则表达式', () => {
   it('匹配邮箱', () => {
     [
       '12345@qq.com',
+      'abc123455@qq.weixin.com',
+      '12345.123.123@qq.weixin.com'
     ].forEach((value) => {
       assert.ok(RegExps.email.test(value));
     });
     [
       '12345#qq.com',
+      '12345.@qq.com',
+      'abc123455#@qq.weixin.com'
     ].forEach((value) => {
       assert.ok(!RegExps.email.test(value));
     });
@@ -112,6 +116,7 @@ describe('正则表达式', () => {
     });
     [
       '256.0.0.0',
+      '0.0.0.0'
     ].forEach((value) => {
       assert.ok(!RegExps.ipv4.test(value));
     });
@@ -120,6 +125,7 @@ describe('正则表达式', () => {
   it('匹配身份证号码', () => {
     [
       '350301198906180060',
+      '35030119890618006x',
     ].forEach((value) => {
       assert.ok(RegExps.idcard.test(value));
     });

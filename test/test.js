@@ -1,6 +1,6 @@
 /*
- * @Author: kael 
- * @Date: 2018-02-14 17:35:48 
+ * @Author: kael
+ * @Date: 2018-02-14 17:35:48
  * @Last Modified by: kael
  * @Last Modified time: 2018-07-10 16:50:29
  */
@@ -81,6 +81,7 @@ describe('正则表达式', () => {
   it('匹配邮箱', () => {
     [
       '12345@qq.com',
+      '12345@qq.com.cn',
     ].forEach((value) => {
       assert.ok(RegExps.email.test(value));
     });
@@ -94,6 +95,9 @@ describe('正则表达式', () => {
   it('匹配 url', () => {
     [
       'https://www.qq.com',
+      'https://www.qq.com:9090',
+      'http://www.qq.com',
+      'http://www.qq.com:9090',
     ].forEach((value) => {
       assert.ok(RegExps.url.test(value));
     });
